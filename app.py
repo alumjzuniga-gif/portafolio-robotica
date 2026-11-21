@@ -138,7 +138,7 @@ st.markdown("---")
 # 20% SECCIÓN INTERACTIVA
 # ==========================================
 st.header("🎮 Laboratorio Interactivo (20%)")
-
+st.image("brazo.jpg", caption="Prototipo físico de Brazo Robótico 3D (Servos MG90S)", width=400)
 col_int1, col_int2 = st.columns(2)
 
 with col_int1:
