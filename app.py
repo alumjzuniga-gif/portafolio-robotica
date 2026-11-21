@@ -142,12 +142,29 @@ st.header("🎮 Laboratorio Interactivo (20%)")
 col_int1, col_int2 = st.columns(2)
 
 with col_int1:
-    st.subheader("🦾 Simulador de Ejes del Brazo 3D")
+
+st.subheader("🦾 Simulador de Ejes del Brazo 3D")
     base = st.slider("Ángulo de Base (Rotación X)", 0, 180, 90)
     codo = st.slider("Ángulo de Codo (Elevación Y)", 0, 180, 45)
     pinza = st.selectbox("Estado de la Pinza", ["Abierta (0°)", "Media (45°)", "Cerrada (90°)"])
     
-    st.caption(f"Telemetría en vivo -> Base: {base}° | Codo: {codo}° | Efector: {pinza}")
+    # Cálculo de cinemática en tiempo real para dibujar el brazo
+    import math
+    rad_base = math.radians(base)
+    rad_codo = math.radians(codo)
+    
+    # Articulaciones (Base fija -> Codo -> Pinza)
+    x_codo = math.cos(rad_base) * 5
+    y_codo = math.sin(rad_base) * 5
+    x_pinza = x_codo + math.cos(rad_codo) * 4
+    y_pinza = y_codo + math.sin(rad_codo) * 4
+    
+    st.line_chart(
+        {"Altura Y": [0, y_codo, y_pinza]},
+        height=200
+    )
+    
+    st.caption(f"Telemetría en vivo -> Base: {base}° | Codo: {codo}° | Pinza: {pinza} | Alcance X: {round(x_pinza, 1)} cm")
     if st.button("Ejecutar secuencia de agarre"):
         st.success(f"¡Posición alcanzada! Base: {base}°, Codo: {codo}°, Pinza: {pinza}")
 
