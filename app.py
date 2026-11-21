@@ -176,7 +176,7 @@ st.markdown("---")
 st.header("📱 Acceso Rápido desde Celular")
 
 if "url_activa" not in st.session_state:
-    st.session_state.url_activa = obtener_url_local()
+    st.session_state.url_activa = "https://portafolio-robotica-sroaoutzezvdytrqgdwtja.streamlit.app/"
 
 col_qr1, col_qr2 = st.columns([1, 2])
 
